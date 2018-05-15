@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.Month;
+import java.util.function.BiFunction;
 
 /**
  * Created by Pranav S Kurup on 5/15/2018.
@@ -47,4 +49,24 @@ public class ReportEntity implements Serializable {
     @Range(min = 0l, message = "Revenue accepts only positive number")
     private BigDecimal revenue;
 
+    public static BiFunction<ReportEntity, ReportEntity, ReportEntity> remap(Month monEnum, ReportSite siteEnum) {
+        return (en1, en2) -> {
+            ReportEntityBuilder builder = ReportEntity.builder();
+            ReportID.ReportIDBuilder idBuilder = ReportID.builder();
+            if (monEnum != null) {
+                idBuilder.month(monEnum);
+            }
+            if (siteEnum != null) {
+                idBuilder.site(siteEnum);
+            }
+            builder.id(idBuilder.build());
+            return builder.
+                    requests(en1.requests.add(en2.requests)).
+                    impressions(en1.impressions.add(en2.impressions)).
+                    clicks(en1.clicks.add(en2.clicks)).
+                    conversions(en1.conversions.add(en2.conversions)).
+                    revenue(en1.revenue.add(en2.revenue)).
+                    build();
+        };
+    }
 }
