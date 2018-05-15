@@ -53,7 +53,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-        <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -88,10 +87,14 @@
                         </goals>
                         <configuration>
                             <!-- Configures the source directory of integration tests. -->
-                            <sources>
-                                <source>src/test/resources</source>
-                                <source>src/integration-test/resources</source>
-                            </sources>
+                            <resources>
+                                <resource>
+                                    <directory>src/test/resources</directory>
+                                </resource>
+                                <resource>
+                                    <directory>src/integration-test/resources</directory>
+                                </resource>
+                            </resources>
                         </configuration>
                     </execution>
                 </executions>
