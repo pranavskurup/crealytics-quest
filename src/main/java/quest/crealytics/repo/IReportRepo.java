@@ -2,9 +2,7 @@ package quest.crealytics.repo;
 
 import quest.crealytics.model.ReportEntity;
 import quest.crealytics.model.ReportSite;
-import quest.crealytics.vo.ReportVO;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import java.time.Month;
 import java.util.List;
@@ -14,5 +12,6 @@ import java.util.List;
  */
 public interface IReportRepo {
     Flux<ReportEntity> findReportEntityByMonthAndSite(Month month, ReportSite site);
+
     void populate(List<ReportEntity> reports);
 }
