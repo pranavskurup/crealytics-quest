@@ -49,7 +49,7 @@ public class ReportRepo implements IReportRepo {
     @Override
     public void populate(List<ReportEntity> reports) {
         log.info("Populating database with records");
-        reports.stream().forEach(reportEntity -> entityManager.persist(reportEntity));
+        reports.stream().forEach(entityManager::persist);
         log.info("Populated database with records");
     }
 }
