@@ -47,6 +47,22 @@ public class ReportUtil {
     private final Validator validator;
     private final ResourcePatternResolver resourceLoader;
 
+    private static boolean isReport(String filename) {
+        return PATTERN.matcher(filename).find();
+    }
+
+    private static Month getMonth(String filename) {
+        Matcher matcher = PATTERN.matcher(filename);
+        matcher.find();
+        return MonthUtil.of(matcher.group(3));
+    }
+
+    public static Year getYear(String filename) {
+        Matcher matcher = PATTERN.matcher(filename);
+        matcher.find();
+        return Year.of(Integer.parseInt(matcher.group(1)));
+    }
+
     public List<ReportEntity> readReports() {
         String dataDir = System.getProperty("crealytics.data.dir");
         if (dataDir == null || dataDir.isEmpty()) {
@@ -57,6 +73,7 @@ public class ReportUtil {
             return getResourceFolderFilesFromFile(new File(dataDir)).stream().map(getReportEntities()).flatMap(List::stream).collect(Collectors.toList());
         }
     }
+
     private Function<File, List<ReportEntity>> getReportEntities() {
         return (File file) -> {
             try (FileReader reader = new FileReader(file);) {
@@ -178,7 +195,6 @@ public class ReportUtil {
         }
     }
 
-
     private List<File> getResourceFolderFilesFromFile(File dataDir) {
         List<File> retVal = new LinkedList<>();
         if (dataDir != null && dataDir.isDirectory()) {
@@ -188,22 +204,6 @@ public class ReportUtil {
             }
         }
         return retVal;
-    }
-
-    private static boolean isReport(String filename) {
-        return PATTERN.matcher(filename).find();
-    }
-
-    private static Month getMonth(String filename) {
-        Matcher matcher = PATTERN.matcher(filename);
-        matcher.find();
-        return MonthUtil.of(matcher.group(3));
-    }
-
-    public static Year getYear(String filename) {
-        Matcher matcher = PATTERN.matcher(filename);
-        matcher.find();
-        return Year.of(Integer.parseInt(matcher.group(1)));
     }
 
 }
