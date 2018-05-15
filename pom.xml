@@ -8,6 +8,7 @@
     <artifactId>quest.crealytics</artifactId>
     <version>development-SNAPSHOT</version>
     <properties>
+
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,7 +21,13 @@
         <lombok.version>1.16.20</lombok.version>
         <!--Test Dependencies versions-->
         <cucumber.version>1.2.5</cucumber.version>
-        <!--Plugin versions-->
+        <!--sonar related-->
+        <sonar.sources>pom.xml,src/main/java,src/main/resources,src/test/resources/features</sonar.sources>
+        <sonar.tests.exclusions>src/test/java,src/integration-test/java</sonar.tests.exclusions>
+        <sonar.jacoco.reportPaths>${project.build.directory}/coverage-reports/jacoco-ut.exec</sonar.jacoco.reportPaths>
+        <sonar.jacoco.itReportPath>${project.build.directory}/coverage-reports/jacoco-it.exec</sonar.jacoco.itReportPath>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.language>java</sonar.language>
     </properties>
     <dependencyManagement>
         <dependencies>
