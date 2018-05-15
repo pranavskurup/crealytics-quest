@@ -19,18 +19,16 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @ContextConfiguration
 @Slf4j
 public class SpringIntegrationTestSupport {
+    @LocalServerPort
+    protected int port;
     @Getter
     @Setter
     private WebTestClient.RequestHeadersSpec<?> spec = null;
     @Getter
     @Setter
     private WebTestClient.ResponseSpec res = null;
-
     @Autowired
     @Getter
     private WebTestClient webClient;
-
-    @LocalServerPort
-    protected int port;
 
 }
