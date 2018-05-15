@@ -1,7 +1,9 @@
 package quest.crealytics.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -16,6 +18,8 @@ import java.time.Year;
 @Embeddable
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ReportID implements Serializable {
     private static final long serialVersionUID = -1648043182823391693L;
     @Column

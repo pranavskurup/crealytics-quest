@@ -1,7 +1,9 @@
 package quest.crealytics.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.Column;
@@ -22,6 +24,8 @@ import java.util.function.BiFunction;
 @Builder
 @Entity
 @Table(name = "report")
+@NoArgsConstructor
+@AllArgsConstructor
 public class ReportEntity implements Serializable {
     private static final long serialVersionUID = -3938006942330436676L;
 
