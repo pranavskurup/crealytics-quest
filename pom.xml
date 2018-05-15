@@ -13,6 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <skip.unit.tests>false</skip.unit.tests>
+        <skip.integration.tests>false</skip.integration.tests>
 
         <!--External Dependencies versions-->
         <spring.boot.version>2.0.2.RELEASE</spring.boot.version>
@@ -104,6 +105,9 @@
                     <argLine>${surefireArgLine}</argLine>
                     <!-- Skips unit tests if the ofSite of skip.unit.tests property is true -->
                     <skipTests>${skip.unit.tests}</skipTests>
+                    <excludes>
+                        <exclude>**/Cucumber*Test.java</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -139,6 +143,36 @@
                             <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
                             <!-- Sets the output directory for the code coverage report. -->
                             <outputDirectory>${project.build.directory}/jacoco-ut</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.21.0</version>
+                <executions>
+                    <!--
+                        Ensures that both integration-test and verify goals of the Failsafe Maven
+                        plugin are executed.
+                    -->
+                    <execution>
+                        <id>integration-tests</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Sets the VM argument line used when integration tests are run. -->
+                            <argLine>${failsafeArgLine}</argLine>
+                            <!--
+                                Skips integration tests if the ofSite of skip.integration.tests property
+                                is true
+                            -->
+                            <skipTests>${skip.integration.tests}</skipTests>
+                            <includes>
+                                <include>**/Cucumber*Test.java</include>
+                            </includes>
                         </configuration>
                     </execution>
                 </executions>
