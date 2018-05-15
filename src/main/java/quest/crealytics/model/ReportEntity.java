@@ -36,6 +36,10 @@ public class ReportEntity implements Serializable {
     private BigInteger impressions;
 
     @Column
+    @Range(min = 0l, message = "Clicks accepts only positive number")
+    private BigInteger clicks;
+
+    @Column
     @Range(min = 0l, message = "Conversions accepts only positive number")
     private BigInteger conversions;
 
