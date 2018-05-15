@@ -34,7 +34,7 @@ public class ReportAPI1TestSteps extends SpringIntegrationTestSupport {
     }
 
     @Then("^Rejected response with status code '(\\d+)' and message '(.*)'$")
-    public void rejected_response_with_status_code(final int statusCode, final String message){
+    public void rejected_response_with_status_code(final int statusCode, final String message) {
 
     }
 
