@@ -11,6 +11,7 @@
 ### Frameworks Used
 * Spring Boot 2.0.0.RELEASE
 * Cucumber 1.2.5'
+* JPA Hibernate (H2 Database)
 
 ## Test cases
 #### To run all test cases please run:
