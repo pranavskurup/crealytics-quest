@@ -1,6 +1,5 @@
 package quest.crealytics.model;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -9,11 +8,13 @@ import java.time.Month;
 import java.time.Year;
 import java.util.stream.Stream;
 
+import static org.junit.Assert.assertTrue;
+
 public class ReportEntityTest {
 
     @Test
     public void remapWithoutMonthAndReportSite() {
-        remapWithMonthAndReportSite(null,null);
+        remapWithMonthAndReportSite(null, null);
     }
 
 
@@ -21,12 +22,12 @@ public class ReportEntityTest {
     public void remapWithMonthAndReportSite() {
         Stream.of(Month.values()).forEach(month -> {
             Stream.of(ReportSite.values()).forEach(site -> {
-                remapWithMonthAndReportSite(month,site);
+                remapWithMonthAndReportSite(month, site);
             });
         });
     }
 
-    private void remapWithMonthAndReportSite(Month  month, ReportSite site) {
+    private void remapWithMonthAndReportSite(Month month, ReportSite site) {
 
         ReportEntity.ReportEntityBuilder builder = ReportEntity.builder();
         builder.id(ReportID.builder().site(ReportSite.ofSite("android")).month(Month.APRIL).year(Year.of(2018)).build())
@@ -57,6 +58,6 @@ public class ReportEntityTest {
                         conversions(ent1.getConversions().add(ent2.getConversions())).
                         revenue(ent1.getRevenue().add(ent2.getRevenue())).build();
 
-        Assert.assertTrue(ReportEntity.remap(month, site).apply(ent1, ent2).equals(expectedEntity));
+        assertTrue(ReportEntity.remap(month, site).apply(ent1, ent2).equals(expectedEntity));
     }
 }
