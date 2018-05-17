@@ -33,10 +33,10 @@ public class ReportVOTest {
                 .clicks(new BigInteger("30965"))
                 .conversions(new BigInteger("7608"))
                 .revenue(new BigDecimal("23555.46"))
-                .ctr(0.2609522189871582d)
-                .cr(0.06411511325865653d)
-                .fillRate(95.05263431934651d)
-                .ecpm(1.9850959329123994).build();
+                .ctr(0.26)
+                .cr(0.06)
+                .fillRate(95.05)
+                .ecpm(1.99).build();
         Assert.assertTrue(expectedVo.equals(reportVO));
     }
 }
