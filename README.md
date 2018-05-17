@@ -69,3 +69,64 @@ java -jar target/quest.crealytics-development-SNAPSHOT-spring-boot.jar
 ~~~shell
 java -jar target/quest.crealytics-development-SNAPSHOT-spring-boot.jar -Dcrealytics.data.dir=<directory-to-csv-files>
 ~~~
+
+## Report Endpoint '/reports'
+### Without Request params
+
+#### Request:
+```http
+GET /reports HTTP/1.1
+Accept: application/json;charset=UTF-8
+```
+
+#### Response
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{"month":"all","site":"all","requests":68823820,"impressions":64422713,"clicks":184724,"conversions":39477,"revenue":128351.91,"CTR":0.29,"CR":0.06,"fill_rate":93.61,"eCPM":1.99}
+```
+### With Request params
+
+Both '**month**' and '**site**' are optional params
+
+#### Request:
+```http
+GET /reports?month=<valid-month>&site=<valid-site> HTTP/1.1
+Accept: application/json;charset=UTF-8
+```
+
+#### Response
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{"month":"<valid-month>","site":"<valid-site>","requests":68823820,"impressions":64422713,"clicks":184724,"conversions":39477,"revenue":128351.91,"CTR":0.29,"CR":0.06,"fill_rate":93.61,"eCPM":1.99}
+```
+
+### With invalid Request params
+
+#### Request:
+```http
+GET /reports?month=<invalid-month>&site=<invalid-site> HTTP/1.1
+Accept: application/json;charset=UTF-8
+```
+#### Response
+```http
+HTTP/1.1 400 OK
+Content-Type: application/json;charset=UTF-8
+
+{"statusCode":"400","msg":"Invalid value for MonthOfYear: <invalid-month>"}
+```
+#### Request:
+```http
+GET /reports?month=<valid-month>&site=<invalid-site> HTTP/1.1
+Accept: application/json;charset=UTF-8
+```
+#### Response
+```http
+HTTP/1.1 400 OK
+Content-Type: application/json;charset=UTF-8
+
+{"statusCode":"400","msg":"Invalid value for MonthOfYear: <invalid-site>"}
+```
