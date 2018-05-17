@@ -15,13 +15,13 @@ public enum ReportHeader {
         this.header = header;
     }
 
-    public static ReportHeader ofHeader(String header) {
+    public static ReportHeader ofHeader(final String header) {
+        String trimmed=header.trim();
         Assert.notNull(header, "Header is mandatory");
-        header = header.trim();
         ReportHeader[] headers = ReportHeader.values();
         for (int i = 0; i < headers.length; i++) {
             ReportHeader reportHeader = headers[i];
-            if (reportHeader.getHeader().equals(header)) {
+            if (reportHeader.getHeader().equals(trimmed)) {
                 return reportHeader;
             }
         }

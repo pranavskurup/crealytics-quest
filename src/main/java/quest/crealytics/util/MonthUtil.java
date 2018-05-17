@@ -37,7 +37,7 @@ public final class MonthUtil {
         if (currentMonth == null) {
             throw new MonthNotFoundException("Invalid value for MonthOfYear: " + mon);
         }
-        log.debug("Converted {} to [] ", mon, currentMonth);
+        log.debug("Converted {} to {} ", mon, currentMonth);
         return currentMonth;
     }
 

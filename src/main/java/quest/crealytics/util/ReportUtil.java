@@ -158,40 +158,39 @@ public class ReportUtil {
     }
 
     private void build(ReportEntity.ReportEntityBuilder builder, String currentLine, String currentHeader) {
-        if (currentLine == null || currentHeader == null) {
-            return;
-        }
-        ReportHeader reportHeader = ReportHeader.ofHeader(currentHeader);
-        Assert.notNull(reportHeader, "Unable to find report header for " + currentHeader);
-        currentLine = currentLine.trim();
-        ReportID.ReportIDBuilder idBuilder = ReportID.builder();
-        switch (reportHeader) {
-            case SITE:
-                idBuilder.site(ReportSite.ofSite(currentLine));
-                builder.id(idBuilder.build());
-                break;
-            case REQUESTS:
-                if (NumberUtils.isCreatable(currentLine))
-                    builder.requests(new BigInteger(currentLine));
-                break;
-            case IMPRESSIONS:
-                if (NumberUtils.isCreatable(currentLine))
-                    builder.impressions(new BigInteger(currentLine));
-                break;
-            case CLCIKS:
-                if (NumberUtils.isCreatable(currentLine))
-                    builder.clicks(new BigInteger(currentLine));
-                break;
-            case CONVERSIONS:
-                if (NumberUtils.isCreatable(currentLine))
-                    builder.conversions(new BigInteger(currentLine));
-                break;
-            case REVENUE:
-                if (NumberUtils.isCreatable(currentLine))
-                    builder.revenue(new BigDecimal(currentLine));
-                break;
-            default:
-                break;
+        if (currentLine != null && currentHeader != null) {
+            ReportHeader reportHeader = ReportHeader.ofHeader(currentHeader);
+            Assert.notNull(reportHeader, "Unable to find report header for " + currentHeader);
+            ReportID.ReportIDBuilder idBuilder = ReportID.builder();
+            String trimmed=currentLine.trim();
+            switch (reportHeader) {
+                case SITE:
+                    idBuilder.site(ReportSite.ofSite(trimmed));
+                    builder.id(idBuilder.build());
+                    break;
+                case REQUESTS:
+                    if (NumberUtils.isCreatable(trimmed))
+                        builder.requests(new BigInteger(trimmed));
+                    break;
+                case IMPRESSIONS:
+                    if (NumberUtils.isCreatable(trimmed))
+                        builder.impressions(new BigInteger(trimmed));
+                    break;
+                case CLCIKS:
+                    if (NumberUtils.isCreatable(trimmed))
+                        builder.clicks(new BigInteger(trimmed));
+                    break;
+                case CONVERSIONS:
+                    if (NumberUtils.isCreatable(trimmed))
+                        builder.conversions(new BigInteger(trimmed));
+                    break;
+                case REVENUE:
+                    if (NumberUtils.isCreatable(trimmed))
+                        builder.revenue(new BigDecimal(trimmed));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
