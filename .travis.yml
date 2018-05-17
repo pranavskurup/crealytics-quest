@@ -1,6 +1,9 @@
 language: java
 sudo: false # faster builds
 
+cache:
+  directories:
+  - "$HOME/.m2"
 
 before_install:
   - sudo apt-get install jq
