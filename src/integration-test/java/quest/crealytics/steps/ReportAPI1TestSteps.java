@@ -39,9 +39,6 @@ public class ReportAPI1TestSteps extends SpringIntegrationTestSupport {
     public void rejected_response_with_status_code(final int statusCode, final String message) {
         getRes().expectStatus().isEqualTo(HttpStatus.valueOf(statusCode));
         WebTestClient.BodyContentSpec bodyContentSpec = getRes().expectBody();
-        bodyContentSpec.consumeWith(entityExchangeResult -> {
-            System.out.println(new String(entityExchangeResult.getResponseBody()));
-        });
         bodyContentSpec.jsonPath("$.statusCode").isNotEmpty();
         bodyContentSpec.jsonPath("$.statusCode").isEqualTo(statusCode);
         bodyContentSpec.jsonPath("$.msg").isNotEmpty();

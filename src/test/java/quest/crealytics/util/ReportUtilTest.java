@@ -1,5 +1,6 @@
 package quest.crealytics.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +33,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Pranav S Kurup on 5/13/2018.
  */
+@Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ReportUtilTest.TestConfiguration.class})
 public class ReportUtilTest {
@@ -45,16 +47,9 @@ public class ReportUtilTest {
         List<ReportEntity> reports = reportUtil.readReports();
         assertTrue("Overall records is 16 in test directory", reports.size() == 16);
         this.reports.forEach(reportActual -> {
-            AtomicBoolean found = new AtomicBoolean(false);
             reports.forEach(reportCreated -> {
-                if (reportActual.equals(reportCreated)) {
-                    found.set(true);
-                }
+                assertTrue(reportActual.equals(reportCreated));
             });
-            if (!found.get()) {
-                System.out.println(reportActual);
-            }
-            assertTrue(found.get());
         });
 
     }
@@ -66,16 +61,9 @@ public class ReportUtilTest {
         List<ReportEntity> reports = reportUtil.readReports();
         assertTrue("Overall records is 16 in 'crealytics.data.dir' directory", reports.size() == 16);
         this.reports.forEach(reportActual -> {
-            AtomicBoolean found = new AtomicBoolean(false);
             reports.forEach(reportCreated -> {
-                if (reportActual.equals(reportCreated)) {
-                    found.set(true);
-                }
+                assertTrue(reportActual.equals(reportCreated));
             });
-            if (!found.get()) {
-                System.out.println(reportActual);
-            }
-            assertTrue(found.get());
         });
 
     }
