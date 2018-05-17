@@ -1,5 +1,6 @@
 package quest.crealytics.model;
 
+import org.springframework.util.Assert;
 import quest.crealytics.exception.SiteNotFoundException;
 
 /**
@@ -15,12 +16,14 @@ public enum ReportSite {
         this.siteType = siteType;
     }
 
-    public static ReportSite ofSite(String site) {
+    public static ReportSite ofSite(final String site) {
+        Assert.notNull(site,"Site should not be null");
         ReportSite currentSite = null;
         ReportSite[] values = ReportSite.values();
+        String trimmed=site.trim();
         for (int i = 0; i < values.length; i++) {
             ReportSite siteEnum = values[i];
-            if (siteEnum.getSiteType().equalsIgnoreCase(site.replace(' ', '_'))) {
+            if (siteEnum.getSiteType().equalsIgnoreCase(trimmed.replace(' ', '_'))) {
                 currentSite = siteEnum;
             }
         }
