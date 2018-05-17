@@ -1,0 +1,5 @@
+---
+exclude_paths:
+  - .mvn/*
+  - src/test/java
+  - src/integration-test/java
