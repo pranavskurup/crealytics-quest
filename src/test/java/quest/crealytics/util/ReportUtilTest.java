@@ -47,9 +47,16 @@ public class ReportUtilTest {
         List<ReportEntity> reports = reportUtil.readReports();
         assertTrue("Overall records is 16 in test directory", reports.size() == 16);
         this.reports.forEach(reportActual -> {
+            AtomicBoolean found = new AtomicBoolean(false);
             reports.forEach(reportCreated -> {
-                assertTrue(reportActual.equals(reportCreated));
+                if (reportActual.equals(reportCreated)) {
+                    found.set(true);
+                }
             });
+            if (!found.get()) {
+                log.error("Not found "+reportActual);
+            }
+            assertTrue(found.get());
         });
 
     }
@@ -61,9 +68,16 @@ public class ReportUtilTest {
         List<ReportEntity> reports = reportUtil.readReports();
         assertTrue("Overall records is 16 in 'crealytics.data.dir' directory", reports.size() == 16);
         this.reports.forEach(reportActual -> {
+            AtomicBoolean found = new AtomicBoolean(false);
             reports.forEach(reportCreated -> {
-                assertTrue(reportActual.equals(reportCreated));
+                if (reportActual.equals(reportCreated)) {
+                    found.set(true);
+                }
             });
+            if (!found.get()) {
+                log.error("Not found "+reportActual);
+            }
+            assertTrue(found.get());
         });
 
     }
