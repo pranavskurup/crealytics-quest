@@ -1,4 +1,4 @@
-# crealytics-quest
+# crealytics-quest [![Build Status](https://travis-ci.org/pranavskurup/crealytics-quest.svg?branch=master)](https://travis-ci.org/pranavskurup/crealytics-quest)
 
 # Solution
 
