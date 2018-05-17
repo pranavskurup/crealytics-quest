@@ -1,4 +1,4 @@
-# crealytics-quest [![Build Status](https://travis-ci.org/pranavskurup/crealytics-quest.svg?branch=master)](https://travis-ci.org/pranavskurup/crealytics-quest)
+# crealytics-quest [![Build Status](https://travis-ci.org/pranavskurup/crealytics-quest.svg?branch=master)](https://travis-ci.org/pranavskurup/crealytics-quest) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ab7599687a674ea1bce4626901a2fa5b)](https://www.codacy.com/app/pranavskurup/crealytics-quest?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pranavskurup/crealytics-quest&amp;utm_campaign=Badge_Grade)
 
 # Solution
 
