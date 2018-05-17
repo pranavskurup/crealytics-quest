@@ -128,5 +128,5 @@ Accept: application/json;charset=UTF-8
 HTTP/1.1 400 OK
 Content-Type: application/json;charset=UTF-8
 
-{"statusCode":"400","msg":"Invalid value for MonthOfYear: <invalid-site>"}
+{"statusCode":"400","msg":"Invalid value for Site: <invalid-site>"}
 ```
