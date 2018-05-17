@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Builder
 public class ErrorVO implements Serializable {
     private static final long serialVersionUID = 7457694782438657935L;
-    String statusCode;
-    String msg;
+    private String statusCode;
+    private String msg;
 }
 

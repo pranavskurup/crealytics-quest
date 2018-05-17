@@ -1,6 +1,5 @@
 package quest.crealytics.util;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +27,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by Pranav S Kurup on 5/13/2018.
  */
@@ -42,72 +43,62 @@ public class ReportUtilTest {
     @Test
     public void readFromTestClassPath() {
         List<ReportEntity> reports = reportUtil.readReports();
-        Assert.assertTrue("Overall records is 16 in test directory",reports.size()==16);
+        assertTrue("Overall records is 16 in test directory", reports.size() == 16);
         this.reports.forEach(reportActual -> {
-            AtomicBoolean found= new AtomicBoolean(false);
-            reports.forEach(reportCreated->{
-                if (reportActual.equals(reportCreated)){
+            AtomicBoolean found = new AtomicBoolean(false);
+            reports.forEach(reportCreated -> {
+                if (reportActual.equals(reportCreated)) {
                     found.set(true);
                 }
             });
-            if(!found.get()){
+            if (!found.get()) {
                 System.out.println(reportActual);
             }
-            Assert.assertTrue(found.get());
+            assertTrue(found.get());
         });
 
     }
 
     @Test
     public void readFromTestFromFolder() {
-        Path resourceDirectory = Paths.get("src","test","resources","data");
-        System.setProperty("crealytics.data.dir",resourceDirectory.toString());
+        Path resourceDirectory = Paths.get("src", "test", "resources", "data");
+        System.setProperty("crealytics.data.dir", resourceDirectory.toString());
         List<ReportEntity> reports = reportUtil.readReports();
-        Assert.assertTrue("Overall records is 16 in 'crealytics.data.dir' directory",reports.size()==16);
+        assertTrue("Overall records is 16 in 'crealytics.data.dir' directory", reports.size() == 16);
         this.reports.forEach(reportActual -> {
-            AtomicBoolean found= new AtomicBoolean(false);
-            reports.forEach(reportCreated->{
-                if (reportActual.equals(reportCreated)){
+            AtomicBoolean found = new AtomicBoolean(false);
+            reports.forEach(reportCreated -> {
+                if (reportActual.equals(reportCreated)) {
                     found.set(true);
                 }
             });
-            if(!found.get()){
+            if (!found.get()) {
                 System.out.println(reportActual);
             }
-            Assert.assertTrue(found.get());
+            assertTrue(found.get());
         });
 
     }
 
     @Test
     public void readFromTestFromEmptyFolder() {
-        Path resourceDirectory = Paths.get("src","test","resources");
-        System.setProperty("crealytics.data.dir",resourceDirectory.toString());
+        Path resourceDirectory = Paths.get("src", "test", "resources");
+        System.setProperty("crealytics.data.dir", resourceDirectory.toString());
         List<ReportEntity> reports = reportUtil.readReports();
-        Assert.assertTrue("Overall records is 0 in 'crealytics.data.dir' directory",reports.size()==0);
+        assertTrue("Overall records is 0 in 'crealytics.data.dir' directory", reports.size() == 0);
     }
 
     @Test
     public void readFromTestFromInvalidRecordsFolder() {
-        Path resourceDirectory = Paths.get("src","test","resources","invalid_record");
-        System.setProperty("crealytics.data.dir",resourceDirectory.toString());
+        Path resourceDirectory = Paths.get("src", "test", "resources", "invalid_record");
+        System.setProperty("crealytics.data.dir", resourceDirectory.toString());
         List<ReportEntity> reports = reportUtil.readReports();
-        Assert.assertTrue("Overall valid records is 2 in 'crealytics.data.dir' directory",reports.size()==2);
-    }
-    @ContextConfiguration
-    @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-    public static class TestConfiguration {
-
-
-        @Bean
-        public ReportUtil reportUtil(Validator validator, ResourcePatternResolver resourceLoader) {
-            return new ReportUtil(validator, resourceLoader);
-        }
+        assertTrue("Overall valid records is 2 in 'crealytics.data.dir' directory", reports.size() == 2);
     }
 
     @Before
-    public void init(){
-        this.reports=new LinkedList<>();
+    public void init() {
+        this.reports = new LinkedList<>();
         ReportEntity.ReportEntityBuilder builder = ReportEntity.builder();
         builder.id(ReportID.builder().site(ReportSite.ofSite("desktop web")).month(Month.JANUARY).year(Year.of(2018)).build())
                 .requests(new BigInteger("12483775"))
@@ -236,5 +227,16 @@ public class ReportUtilTest {
                 .conversions(new BigInteger("1564"))
                 .revenue(new BigDecimal("4692.28"));
         reports.add(builder.build());
+    }
+
+    @ContextConfiguration
+    @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+    public static class TestConfiguration {
+
+
+        @Bean
+        public ReportUtil reportUtil(Validator validator, ResourcePatternResolver resourceLoader) {
+            return new ReportUtil(validator, resourceLoader);
+        }
     }
 }

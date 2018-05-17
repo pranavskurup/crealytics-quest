@@ -20,6 +20,6 @@ public class ReportApiController {
 
     @GetMapping("reports")
     public Mono<ReportVO> getReportAPI1(@RequestParam(required = false) String month, @RequestParam(required = false) String site) {
-        return iReportService.getReport(month,site);
+        return iReportService.getReport(month, site);
     }
 }

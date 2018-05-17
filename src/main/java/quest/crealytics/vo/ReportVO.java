@@ -107,6 +107,14 @@ public class ReportVO implements Serializable {
 
     public static class ReportVOBuilder {
 
+        public static double round(double value, int places) {
+            if (places < 0) throw new IllegalArgumentException();
+
+            BigDecimal bd = new BigDecimal(value);
+            bd = bd.setScale(places, RoundingMode.HALF_UP);
+            return bd.doubleValue();
+        }
+
         public ReportVOBuilder empty(Month monEnum, ReportSite siteEnum) {
             if (monEnum != null) {
                 String month = monEnum.name();
@@ -128,14 +136,6 @@ public class ReportVO implements Serializable {
             fillRate(round((impressions.doubleValue() / requests.doubleValue()) * 100, 2));
             ecpm(round((revenue.doubleValue() / impressions.doubleValue()) * 1000, 2));
             return this;
-        }
-
-        public static double round(double value, int places) {
-            if (places < 0) throw new IllegalArgumentException();
-
-            BigDecimal bd = new BigDecimal(value);
-            bd = bd.setScale(places, RoundingMode.HALF_UP);
-            return bd.doubleValue();
         }
     }
 

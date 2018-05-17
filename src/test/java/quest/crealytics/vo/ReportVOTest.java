@@ -1,6 +1,5 @@
 package quest.crealytics.vo;
 
-import org.junit.Assert;
 import org.junit.Test;
 import quest.crealytics.model.ReportEntity;
 import quest.crealytics.model.ReportID;
@@ -10,6 +9,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.Month;
 import java.time.Year;
+
+import static org.junit.Assert.assertTrue;
 
 public class ReportVOTest {
 
@@ -37,6 +38,6 @@ public class ReportVOTest {
                 .cr(0.06)
                 .fillRate(95.05)
                 .ecpm(1.99).build();
-        Assert.assertTrue(expectedVo.equals(reportVO));
+        assertTrue(expectedVo.equals(reportVO));
     }
 }
