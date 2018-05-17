@@ -1,8 +1,0 @@
----
-engines:
-  coverage:
-     enabled: true
-     exclude_paths:
-        - .mvn/*
-exclude_paths:
-  - .mvn/*
