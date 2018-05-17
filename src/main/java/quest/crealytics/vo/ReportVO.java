@@ -122,11 +122,19 @@ public class ReportVO implements Serializable {
         }
 
         public ReportVOBuilder calculate() {
-            ctr((clicks.doubleValue() / impressions.doubleValue()) * 100);
-            cr((conversions.doubleValue() / impressions.doubleValue()) * 100);
-            fillRate((impressions.doubleValue() / requests.doubleValue()) * 100);
-            ecpm((revenue.doubleValue() / impressions.doubleValue()) * 1000);
+            ctr(round((clicks.doubleValue() / impressions.doubleValue()) * 100, 2));
+            cr(round((conversions.doubleValue() / impressions.doubleValue()) * 100, 2));
+            fillRate(round((impressions.doubleValue() / requests.doubleValue()) * 100, 2));
+            ecpm(round((revenue.doubleValue() / impressions.doubleValue()) * 1000, 2));
             return this;
+        }
+
+        public static double round(double value, int places) {
+            if (places < 0) throw new IllegalArgumentException();
+
+            BigDecimal bd = new BigDecimal(value);
+            bd = bd.setScale(places, RoundingMode.HALF_UP);
+            return bd.doubleValue();
         }
     }
 
