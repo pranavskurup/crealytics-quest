@@ -24,8 +24,7 @@
         <!--sonar related-->
         <sonar.sources>pom.xml,src/main/java,src/main/resources,src/integration-test/resources/features</sonar.sources>
         <sonar.tests.exclusions>src/test/java,src/integration-test/java</sonar.tests.exclusions>
-        <sonar.jacoco.reportPaths>${project.build.directory}/coverage-reports/jacoco-ut.exec</sonar.jacoco.reportPaths>
-        <sonar.jacoco.itReportPath>${project.build.directory}/coverage-reports/jacoco-it.exec
+        <sonar.jacoco.reportPaths>${project.build.directory}/coverage-reports/jacoco-ut.exec,${project.build.directory}/coverage-reports/jacoco-it.exec</sonar.jacoco.reportPaths>
         </sonar.jacoco.itReportPath>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.language>java</sonar.language>
